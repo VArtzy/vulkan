@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <cstring>
 #include <stdexcept>
 #include <vector>
 #include <vulkan/vulkan_core.h>
@@ -65,11 +66,22 @@ private:
         std::vector<VkExtensionProperties> extensions(extensionCount);
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
 
-        std::cout << "available extensions:\n";
-
-        for (const auto& extension : extensions) {
-            std::cout << '\t' << extension.extensionName << '\n';
+        if(glfwExtensionsSupported(extensions, glfwExtensions, glfwExtensionCount)) {
+            std::cout << "extensions available\n";
         }
+    }
+    bool glfwExtensionsSupported(const std::vector<VkExtensionProperties>& extensions, const char** glfwExtensions, uint32_t glfwExtensionCount) {
+        uint32_t matchesExtensionCount = 0;
+        for (const auto& extension : extensions) {
+            if (matchesExtensionCount == glfwExtensionCount) return true;
+            for (uint32_t i = 0; i < glfwExtensionCount; i++) {
+                if (strcmp(extension.extensionName, glfwExtensions[i]) == 0) {
+                    matchesExtensionCount++;
+                    break;
+                }
+            }
+        }
+        return false;
     }
     void mainLoop() {
         while(!glfwWindowShouldClose(window)) {
