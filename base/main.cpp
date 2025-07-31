@@ -14,6 +14,16 @@ class HelloTriangleApplication {
     const uint32_t HEIGHT = 600;
     GLFWwindow* window;
 
+    const std::vector<const char*> validationLayers = {
+        "VK_LAYER_KHRONOS_validation"
+    };
+
+#ifdef NDEBUG
+    const bool enableValidationLayers = false;
+#else
+    const bool enableValidationLayers = true;
+#endif
+
 public:
     void run() {
         initWindow();
@@ -81,6 +91,15 @@ private:
                 }
             }
         }
+        return false;
+    }
+    bool checkValidationLayerSupport() {
+        uint32_t layerCount;
+        vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+
+        std::vector<VkLayerProperties> availableLayers(layerCount);
+        vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+        
         return false;
     }
     void mainLoop() {
