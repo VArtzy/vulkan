@@ -164,7 +164,11 @@ private:
     }
     bool isDeviceSuitable(VkPhysicalDevice device) {
         QueueFamilyIndices indices = findQueueFamilies(device);
-        return indices.isComplete();
+        bool extensionSupported = checkDeviceExtensionSupport(device);
+        return indices.isComplete() && extensionSupported;
+    }
+    bool checkDeviceExtensionSupport(VkPhysicalDevice device) {
+        return true;
     }
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) {
         QueueFamilyIndices indices;
