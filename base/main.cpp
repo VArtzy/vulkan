@@ -101,7 +101,9 @@ private:
         pickPhysicalDevice();
         createLogicalDevice();
         createSwapChain();
+        createImageViews();
     }
+    void createImageViews() {}
     void mainLoop() {
         while(!glfwWindowShouldClose(window)) {
             glfwPollEvents();
