@@ -103,7 +103,6 @@ private:
         createSwapChain();
         createImageViews();
     }
-    void createImageViews() {}
     void mainLoop() {
         while(!glfwWindowShouldClose(window)) {
             glfwPollEvents();
@@ -119,6 +118,9 @@ private:
         vkDestroyInstance(instance, nullptr);
         glfwDestroyWindow(window);
         glfwTerminate();
+    }
+    void createImageViews() {
+        swapChainImageViews.resize(swapChainImages.size());
     }
     void createSwapChain() {
         SwapChainSupportDetails swapChainSupport = querySwapChainSupport(physicalDevice);
