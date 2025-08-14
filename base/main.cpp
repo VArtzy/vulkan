@@ -102,6 +102,7 @@ private:
         createLogicalDevice();
         createSwapChain();
         createImageViews();
+        createGraphicsPipeline();
     }
     void mainLoop() {
         while(!glfwWindowShouldClose(window)) {
@@ -122,6 +123,7 @@ private:
         glfwDestroyWindow(window);
         glfwTerminate();
     }
+    void createGraphicsPipeline() {}
     void createImageViews() {
         swapChainImageViews.resize(swapChainImages.size());
 
