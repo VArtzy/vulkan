@@ -140,9 +140,25 @@ private:
         glfwDestroyWindow(window);
         glfwTerminate();
     }
+    VkShaderModule createShaderModule(const std::vector<char>& code) {
+	VkPipelineShaderStageCreateInfo createInfo{};
+	createInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+	createInfo.codeSize = code.size();
+	createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+
+	VkShaderModule shaderModule;
+	if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+	    throw std::runtime_error("failed to create shader module!");	
+	}
+
+	return shaderModule;
+    }
     void createGraphicsPipeline() {
 	auto vertShaderCode = readFile("shaders/vert.spv");
 	auto fragShaderCode = readFile("shaders/frag.spv");
+
+	VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
+	VkShaderModule fragShaderModule = createShadedrModule(fragShaderCode);
     }
     void createImageViews() {
         swapChainImageViews.resize(swapChainImages.size());
