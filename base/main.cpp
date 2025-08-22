@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
@@ -55,6 +56,12 @@ struct Vertex {
         bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 
         return bindingDescription;
+    }
+
+    static std::array<VkVertexInputBindingDescription, 2> getAttributeDescription() {
+        std::array<VkVertexInputBindingDescription, 2> attributeDescriptions{};
+        
+        return attributeDescriptions;
     }
 };
 
