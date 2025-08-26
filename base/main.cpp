@@ -58,8 +58,12 @@ struct Vertex {
         return bindingDescription;
     }
 
-    static std::array<VkVertexInputBindingDescription, 2> getAttributeDescription() {
-        std::array<VkVertexInputBindingDescription, 2> attributeDescriptions{};
+    static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescription() {
+        std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions{};
+        attributeDescriptions[0].binding = 0;
+        attributeDescriptions[0].location = 0;
+        attributeDescriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
+        attributeDescriptions[0].offset = offsetof(Vertex, pos);
         
         return attributeDescriptions;
     }
