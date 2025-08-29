@@ -156,6 +156,7 @@ private:
         createGraphicsPipeline();
         createFramebuffers();
         createCommandPool();
+        createVertexBuffer();
         createCommandBuffers();
         createSyncObjects();
     }
@@ -187,6 +188,7 @@ private:
         glfwDestroyWindow(window);
         glfwTerminate();
     }
+    void createVertexBuffer() {}
     void cleanupSwapChain() {
         for (auto framebuffer : swapChainFramebuffers) {
             vkDestroyFramebuffer(device, framebuffer, nullptr);
