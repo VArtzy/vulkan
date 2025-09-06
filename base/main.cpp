@@ -178,6 +178,7 @@ private:
     }
     void cleanup() {
         cleanupSwapChain();
+        vkDestroyBuffer(device, vertexBuffer, nullptr);
         vkDestroyPipeline(device, graphicsPipeline, nullptr);
         vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
         vkDestroyRenderPass(device, renderPass, nullptr);
