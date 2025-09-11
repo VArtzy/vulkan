@@ -207,6 +207,9 @@ private:
         if (vkCreateBuffer(device, &bufferInfo, nullptr, &vertexBuffer) != VK_SUCCESS) {
             throw std::runtime_error("failed to create vertttex buffer!");
         }
+
+    VkMemoryRequirements memRequirements;
+    vkGetBufferMemoryRequirements(device, vertexBuffer, &memRequirements);
     }
     void cleanupSwapChain() {
         for (auto framebuffer : swapChainFramebuffers) {
